@@ -20,8 +20,13 @@
   <!-- ASCII compute field canvas -->
   <canvas id="ascii-canvas"></canvas>
 
-  <!-- Terminal overlay mode indicator -->
+  <!-- Mode indicators -->
   <div id="terminal-mode-badge">TERMINAL_MODE [T]</div>
+  <div id="grid-mode-badge">GRID: DEFAULT [G]</div>
+
+  <!-- Edge diagnostic rails -->
+  <pre class="diag-rail diag-rail-left" id="diag-rail-left" aria-hidden="true"></pre>
+  <pre class="diag-rail diag-rail-right" id="diag-rail-right" aria-hidden="true"></pre>
 
   <!-- Glitch band container -->
   <div id="glitch-bands"></div>
@@ -46,16 +51,20 @@
       <div class="section-header">
         <span class="section-tag">// kernel_00 :: init</span>
         <span class="section-line"></span>
+        <span class="section-diag" aria-hidden="true"></span>
       </div>
       <div class="hero-content">
-        <!-- ASCII boot signature — collapses into real name -->
-        <pre class="ascii-boot" id="ascii-boot" aria-hidden="true">
+        <!-- Boot sequence container -->
+        <div class="boot-sequence" id="boot-sequence">
+          <pre class="boot-log" id="boot-log" aria-hidden="true"></pre>
+          <pre class="ascii-boot" id="ascii-boot" aria-hidden="true">
 ██████╗  █████╗ ██╗  ██╗██╗   ██╗██╗
 ██╔══██╗██╔══██╗██║  ██║██║   ██║██║
 ██████╔╝███████║███████║██║   ██║██║
 ██╔══██╗██╔══██║██╔══██║██║   ██║██║
 ██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗
 ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝</pre>
+        </div>
         <div class="hero-name glitch-text" data-text="RAHUL PATNAIK">RAHUL PATNAIK</div>
         <div class="hero-role">
           <span class="role-line">ML Engineer</span>
@@ -89,11 +98,16 @@
       </div>
     </section>
 
+    <div class="ascii-divider" aria-hidden="true">
+      <pre class="divider-content">──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──┬──</pre>
+    </div>
+
     <!-- ═══════════ PROJECTS — active_blocks ═══════════ -->
     <section id="active_blocks" class="section" data-kernel="01">
       <div class="section-header">
         <span class="section-tag">// kernel_01 :: active_blocks</span>
         <span class="section-line"></span>
+        <span class="section-diag" aria-hidden="true"></span>
       </div>
 
       <div class="blocks-grid">
@@ -103,6 +117,8 @@
             <span class="block-id">BLOCK_00</span>
             <span class="block-status">EXECUTING</span>
           </div>
+          <pre class="block-micro" aria-hidden="true">|0⟩─[Ry]─[Rz]─●─────  q0
+|0⟩─[Ry]─[Rz]─╳─[Ry]  q1</pre>
           <div class="block-title">Quantum-ConvNeXt</div>
           <div class="block-desc">Novel quantum-classical framework for brain tumor MRI classification across field strengths. 99.84% accuracy. 4-qubit dressed quantum circuit with data re-uploading. Target: IEEE TPAMI.</div>
           <div class="block-stack">PyTorch · PennyLane · ConvNeXt · QML</div>
@@ -117,6 +133,11 @@
             <span class="block-id">BLOCK_01</span>
             <span class="block-status">EXECUTING</span>
           </div>
+          <pre class="block-micro" aria-hidden="true">+--+--+--+--+
+|##|##|..|..|
++--+--+--+--+
+|##|++|++|..|
++--+--+--+--+</pre>
           <div class="block-title">CUDA-ML</div>
           <div class="block-desc">Softmax via warp-level primitives & coalesced memory access. Conv2D outperforming PyTorch on matrices &lt;256×256. 1-bit inference engine from scratch for quantised DistilBERT.</div>
           <div class="block-stack">CUDA C++</div>
@@ -132,6 +153,8 @@
             <span class="block-id">BLOCK_02</span>
             <span class="block-status">EXECUTING</span>
           </div>
+          <pre class="block-micro" aria-hidden="true">π(θ) → r(s,a) → ∇J
+  └─ clip(ε) ─ KL ─┘</pre>
           <div class="block-title">GRPO for 3D Structure Generation</div>
           <div class="block-desc">Investigating GRPO and variations as RL objectives for training LLMs on 3D structure generation. Reward signal design and policy optimisation for structural fidelity.</div>
           <div class="block-stack">RL · LLMs · 3D Synthesis</div>
@@ -146,6 +169,8 @@
             <span class="block-id">BLOCK_03</span>
             <span class="block-status">COMPLETE</span>
           </div>
+          <pre class="block-micro" aria-hidden="true">─╲_╱─╲__╱╲_╱──╲╱─
+  gait   freeze  ok</pre>
           <div class="block-title">FoG1DLSTM</div>
           <div class="block-desc">Lightweight hybrid DL for Parkinson's Freezing of Gait detection. 0.748 mAP (highest reported on 70.9 GB MJFF dataset). 3.92 ms inference, 2.34 MB — edge deployable.</div>
           <div class="block-stack">PyTorch · 1D-CNN · Bi-LSTM · Attention · RPi</div>
@@ -175,6 +200,8 @@
             <span class="block-id">BLOCK_05</span>
             <span class="block-status">COMPLETE</span>
           </div>
+          <pre class="block-micro" aria-hidden="true">fp16 [████████████]
+int4 [████........] →gguf</pre>
           <div class="block-title">model2gguf</div>
           <div class="block-desc">Published CLI tool to convert HuggingFace models to GGUF format (fp16/int4). Actively used in llama.cpp / Ollama ecosystem.</div>
           <div class="block-stack">Python · HuggingFace · GGUF · llama.cpp</div>
@@ -218,11 +245,16 @@
       </div>
     </section>
 
+    <div class="ascii-divider" aria-hidden="true">
+      <pre class="divider-content">──┴──┴──┬──┬──┴──┴──┬──┬──┴──┴──┬──┬──┴──┴──┬──</pre>
+    </div>
+
     <!-- ═══════════ RESUME — cv_manifest ═══════════ -->
     <section id="cv_manifest" class="section" data-kernel="02">
       <div class="section-header">
         <span class="section-tag">// kernel_02 :: cv_manifest</span>
         <span class="section-line"></span>
+        <span class="section-diag" aria-hidden="true"></span>
       </div>
 
       <div class="manifest-grid">
@@ -361,11 +393,16 @@
       </div>
     </section>
 
+    <div class="ascii-divider" aria-hidden="true">
+      <pre class="divider-content">──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──┴──┬──</pre>
+    </div>
+
     <!-- ═══════════ ABOUT — system_context ═══════════ -->
     <section id="system_context" class="section" data-kernel="03">
       <div class="section-header">
         <span class="section-tag">// kernel_03 :: system_context</span>
         <span class="section-line"></span>
+        <span class="section-diag" aria-hidden="true"></span>
       </div>
 
       <div class="context-block">
@@ -376,11 +413,16 @@
       </div>
     </section>
 
+    <div class="ascii-divider" aria-hidden="true">
+      <pre class="divider-content">──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──┴──</pre>
+    </div>
+
     <!-- ═══════════ CONTACT — endpoint ═══════════ -->
     <section id="endpoint" class="section" data-kernel="04">
       <div class="section-header">
         <span class="section-tag">// kernel_04 :: endpoint</span>
         <span class="section-line"></span>
+        <span class="section-diag" aria-hidden="true"></span>
       </div>
 
       <div class="endpoint-terminal">

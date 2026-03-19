@@ -318,14 +318,42 @@
   });
 
   // ─── ASCII BOOT SEQUENCE ───
-  function runBootSequence() {
-    const bootEl = document.getElementById('ascii-boot');
-    if (!bootEl) return;
+  const BOOT_LINES = [
+    '> init kernel_00',
+    '> allocating shared memory........ok',
+    '> warp sync established [32 threads/warp]',
+    '> loading compute field',
+    '> visual pipeline stable',
+    '> ─────────────────────────────────',
+  ];
 
-    // After 2.2 seconds, collapse the ASCII name into the real name
+  function runBootSequence() {
+    const bootLog = document.getElementById('boot-log');
+    const bootEl = document.getElementById('ascii-boot');
+    if (!bootLog || !bootEl) return;
+
+    // Type out boot lines with staggered timing
+    BOOT_LINES.forEach((line, i) => {
+      setTimeout(() => {
+        bootLog.textContent += line + '\n';
+      }, i * 280);
+    });
+
+    // After all lines + pause, collapse the entire boot sequence
+    const totalBootTime = BOOT_LINES.length * 280 + 1200;
     setTimeout(() => {
       bootEl.classList.add('collapsed');
-    }, 2200);
+    }, totalBootTime);
+
+    setTimeout(() => {
+      const seq = document.getElementById('boot-sequence');
+      if (seq) {
+        seq.style.transition = 'opacity 0.5s ease, max-height 0.5s ease';
+        seq.style.opacity = '0';
+        seq.style.maxHeight = '0';
+        seq.style.overflow = 'hidden';
+      }
+    }, totalBootTime + 800);
   }
 
   // ─── SECTION HEADER GLITCH SCRAMBLE ───
@@ -386,6 +414,99 @@
     });
   });
 
+  // ─── EDGE DIAGNOSTIC RAILS ───
+  const diagLeft = document.getElementById('diag-rail-left');
+  const diagRight = document.getElementById('diag-rail-right');
+  const DIAG_LABELS = [
+    '[warp_00]', '[sync]', '[bank_01]', '[active]',
+    '[warp_04]', '[coalesce]', '[bank_03]', '[idle]',
+    '[warp_12]', '[diverge]', '[bank_07]', '[sched]',
+    '[warp_08]', '[flush]', '[bank_15]', '[ready]',
+  ];
+  let lastDiagUpdate = 0;
+
+  function updateDiagRails(time) {
+    // Update every ~800ms
+    if (time - lastDiagUpdate < 800) return;
+    lastDiagUpdate = time;
+
+    // Use waveTime to deterministically pick which labels are "active"
+    const offset = Math.floor(waveTime * 2) % DIAG_LABELS.length;
+    let leftText = '';
+    let rightText = '';
+
+    for (let i = 0; i < 20; i++) {
+      const idx = (offset + i) % DIAG_LABELS.length;
+      const label = DIAG_LABELS[idx];
+      // Some labels dim, some bright based on wave
+      const active = Math.sin(waveTime + i * 0.5) > 0.2;
+      leftText += (active ? label : '  ·  ') + ' ';
+      rightText += (active ? DIAG_LABELS[(idx + 8) % DIAG_LABELS.length] : '  ·  ') + ' ';
+    }
+
+    if (diagLeft) diagLeft.textContent = leftText;
+    if (diagRight) diagRight.textContent = rightText;
+  }
+
+  // ─── SECTION-ENTRY DIAGNOSTIC BAR ───
+  const diagObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const diag = entry.target.querySelector('.section-diag');
+        if (!diag || diag.dataset.filled) return;
+        diag.dataset.filled = '1';
+
+        // Animate a loading bar
+        const kernel = entry.target.dataset.kernel || '??';
+        const barLen = 12;
+        let fill = 0;
+        const interval = setInterval(() => {
+          fill++;
+          const filled = '#'.repeat(fill);
+          const empty = '.'.repeat(barLen - fill);
+          diag.textContent = `[${filled}${empty}] K_${kernel}`;
+          if (fill >= barLen) {
+            clearInterval(interval);
+            // Hold briefly, then show final state
+            setTimeout(() => {
+              diag.textContent = `[OK] K_${kernel}`;
+            }, 300);
+          }
+        }, 40);
+      });
+    },
+    { threshold: 0.25 }
+  );
+  sections.forEach((s) => diagObserver.observe(s));
+
+  // ─── GRID INTENSITY TOGGLE (G key) ───
+  const gridModes = ['default', 'dense', 'off'];
+  let gridModeIndex = 0;
+  const gridBadge = document.getElementById('grid-mode-badge');
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'g' || e.key === 'G') {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+      // Remove current grid class
+      document.body.classList.remove('grid-dense', 'grid-off');
+
+      gridModeIndex = (gridModeIndex + 1) % gridModes.length;
+      const mode = gridModes[gridModeIndex];
+
+      if (mode === 'dense') {
+        document.body.classList.add('grid-dense');
+      } else if (mode === 'off') {
+        document.body.classList.add('grid-off');
+      }
+
+      if (gridBadge) {
+        gridBadge.textContent = `GRID: ${mode.toUpperCase()} [G]`;
+      }
+    }
+  });
+
   // ─── MAIN ANIMATION LOOP ───
   let rafId;
   let startTime;
@@ -399,6 +520,7 @@
     drawAsciiGrid();
     updateNoise();
     maybeGlitch(elapsed);
+    updateDiagRails(elapsed);
 
     rafId = requestAnimationFrame(animate);
   }

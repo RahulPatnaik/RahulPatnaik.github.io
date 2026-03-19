@@ -147,6 +147,158 @@ body.terminal-mode #terminal-mode-badge {
   margin-bottom: 0;
 }
 
+/* ═══ EDGE DIAGNOSTIC RAILS ═══ */
+.diag-rail {
+  position: fixed;
+  top: 60px;
+  bottom: 30px;
+  width: 14px;
+  z-index: 2;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 18px;
+  color: var(--grey-400);
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  overflow: hidden;
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+  white-space: pre;
+}
+
+.diag-rail-left {
+  left: 6px;
+}
+
+.diag-rail-right {
+  right: 6px;
+  writing-mode: vertical-rl;
+}
+
+/* ═══ ASCII SECTION DIVIDERS ═══ */
+.ascii-divider {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 0;
+  overflow: hidden;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider-content {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--grey-400);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  opacity: 0.4;
+  white-space: pre;
+  margin: 0;
+}
+
+/* ═══ BOOT LOG ═══ */
+.boot-sequence {
+  margin-bottom: 16px;
+}
+
+.boot-log {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--grey-500);
+  margin: 0 0 8px 0;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.boot-log .boot-line {
+  opacity: 0;
+  animation: boot-line-in 0.3s ease forwards;
+}
+
+@keyframes boot-line-in {
+  0% { opacity: 0; transform: translateX(-4px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+/* ═══ SECTION DIAGNOSTIC BAR ═══ */
+.section-diag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--grey-500);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  flex-shrink: 0;
+}
+
+.section.visible .section-diag {
+  opacity: 1;
+}
+
+/* ═══ PROJECT MICRO-VISUALS ═══ */
+.block-micro {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1.4;
+  color: var(--grey-500);
+  margin: 0 0 10px 0;
+  padding: 6px 0;
+  border-left: 1px solid var(--grey-400);
+  padding-left: 10px;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+  white-space: pre;
+}
+
+.compute-block:hover .block-micro {
+  opacity: 0.85;
+  color: var(--grey-700);
+}
+
+/* ═══ GRID INTENSITY STATES ═══ */
+body.grid-dense #grid-canvas {
+  opacity: 0.7 !important;
+}
+
+body.grid-dense #ascii-canvas {
+  opacity: 0.3 !important;
+}
+
+body.grid-off #grid-canvas {
+  opacity: 0 !important;
+}
+
+body.grid-off #ascii-canvas {
+  opacity: 0.05 !important;
+}
+
+/* Grid mode badge — reuse terminal-mode-badge style */
+#grid-mode-badge {
+  position: fixed;
+  top: 48px;
+  left: 24px;
+  font-size: 9px;
+  color: var(--grey-500);
+  letter-spacing: 0.15em;
+  padding: 4px 10px;
+  border: 1px solid var(--grey-400);
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+body.grid-dense #grid-mode-badge,
+body.grid-off #grid-mode-badge {
+  opacity: 1;
+}
+
 /* ═══ GLITCH BANDS ═══ */
 #glitch-bands {
   position: fixed;
@@ -854,6 +1006,18 @@ footer {
   }
 
   .nav-label, .nav-status {
+    display: none;
+  }
+
+  .diag-rail {
+    display: none;
+  }
+
+  .block-micro {
+    font-size: 8px;
+  }
+
+  #grid-mode-badge {
     display: none;
   }
 
