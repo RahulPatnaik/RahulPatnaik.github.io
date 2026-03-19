@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rahul Patnaik — Systems / ML / Research</title>
+  <meta name="description" content="Portfolio of Rahul Patnaik — ML Engineer, Systems Researcher, CUDA Developer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Noise overlay -->
+  <div id="noise-overlay"></div>
+
+  <!-- CUDA thread-block canvas -->
+  <canvas id="grid-canvas"></canvas>
+
+  <!-- ASCII compute field canvas -->
+  <canvas id="ascii-canvas"></canvas>
+
+  <!-- Terminal overlay mode indicator -->
+  <div id="terminal-mode-badge">TERMINAL_MODE [T]</div>
+
+  <!-- Glitch band container -->
+  <div id="glitch-bands"></div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <span class="nav-label">SYS.NAV</span>
+    <div class="nav-links">
+      <a href="#kernel_00" data-section="00">kernel_00</a>
+      <a href="#active_blocks" data-section="01">active_blocks</a>
+      <a href="#cv_manifest" data-section="02">cv_manifest</a>
+      <a href="#system_context" data-section="03">sys_context</a>
+      <a href="#endpoint" data-section="04">endpoint</a>
+    </div>
+    <span class="nav-status" id="nav-status">IDLE</span>
+  </nav>
+
+  <main>
+
+    <!-- ═══════════ HERO — kernel_00 ═══════════ -->
+    <section id="kernel_00" class="section" data-kernel="00">
+      <div class="section-header">
+        <span class="section-tag">// kernel_00 :: init</span>
+        <span class="section-line"></span>
+      </div>
+      <div class="hero-content">
+        <!-- ASCII boot signature — collapses into real name -->
+        <pre class="ascii-boot" id="ascii-boot" aria-hidden="true">
+██████╗  █████╗ ██╗  ██╗██╗   ██╗██╗
+██╔══██╗██╔══██╗██║  ██║██║   ██║██║
+██████╔╝███████║███████║██║   ██║██║
+██╔══██╗██╔══██║██╔══██║██║   ██║██║
+██║  ██║██║  ██║██║  ██║╚██████╔╝███████╗
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝</pre>
+        <div class="hero-name glitch-text" data-text="RAHUL PATNAIK">RAHUL PATNAIK</div>
+        <div class="hero-role">
+          <span class="role-line">ML Engineer</span>
+          <span class="role-sep">|</span>
+          <span class="role-line">Systems</span>
+          <span class="role-sep">|</span>
+          <span class="role-line">Research</span>
+        </div>
+        <div class="hero-sub">
+          <span class="terminal-cursor">▌</span>
+          <span id="typed-text"></span>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric">
+            <span class="metric-label">publications</span>
+            <span class="metric-value">4+</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">patents</span>
+            <span class="metric-value">2</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">threads</span>
+            <span class="metric-value">∞</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span>scroll :: next_kernel</span>
+        <div class="scroll-arrow">↓</div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PROJECTS — active_blocks ═══════════ -->
+    <section id="active_blocks" class="section" data-kernel="01">
+      <div class="section-header">
+        <span class="section-tag">// kernel_01 :: active_blocks</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="blocks-grid">
+
+        <div class="compute-block" data-load="0.94">
+          <div class="block-header">
+            <span class="block-id">BLOCK_00</span>
+            <span class="block-status">EXECUTING</span>
+          </div>
+          <div class="block-title">Quantum-ConvNeXt</div>
+          <div class="block-desc">Novel quantum-classical framework for brain tumor MRI classification across field strengths. 99.84% accuracy. 4-qubit dressed quantum circuit with data re-uploading. Target: IEEE TPAMI.</div>
+          <div class="block-stack">PyTorch · PennyLane · ConvNeXt · QML</div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.94"></div>
+            <span class="load-val">LOAD 0.94</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.87">
+          <div class="block-header">
+            <span class="block-id">BLOCK_01</span>
+            <span class="block-status">EXECUTING</span>
+          </div>
+          <div class="block-title">CUDA-ML</div>
+          <div class="block-desc">Softmax via warp-level primitives & coalesced memory access. Conv2D outperforming PyTorch on matrices &lt;256×256. 1-bit inference engine from scratch for quantised DistilBERT.</div>
+          <div class="block-stack">CUDA C++</div>
+          <div class="block-links"><a href="https://github.com/RahulPatnaik/CUDA-ML" target="_blank" rel="noopener">[src]</a></div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.87"></div>
+            <span class="load-val">LOAD 0.87</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.91">
+          <div class="block-header">
+            <span class="block-id">BLOCK_02</span>
+            <span class="block-status">EXECUTING</span>
+          </div>
+          <div class="block-title">GRPO for 3D Structure Generation</div>
+          <div class="block-desc">Investigating GRPO and variations as RL objectives for training LLMs on 3D structure generation. Reward signal design and policy optimisation for structural fidelity.</div>
+          <div class="block-stack">RL · LLMs · 3D Synthesis</div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.91"></div>
+            <span class="load-val">LOAD 0.91</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.82">
+          <div class="block-header">
+            <span class="block-id">BLOCK_03</span>
+            <span class="block-status">COMPLETE</span>
+          </div>
+          <div class="block-title">FoG1DLSTM</div>
+          <div class="block-desc">Lightweight hybrid DL for Parkinson's Freezing of Gait detection. 0.748 mAP (highest reported on 70.9 GB MJFF dataset). 3.92 ms inference, 2.34 MB — edge deployable.</div>
+          <div class="block-stack">PyTorch · 1D-CNN · Bi-LSTM · Attention · RPi</div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.82"></div>
+            <span class="load-val">LOAD 0.82</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.78">
+          <div class="block-header">
+            <span class="block-id">BLOCK_04</span>
+            <span class="block-status">COMPLETE</span>
+          </div>
+          <div class="block-title">LlamaIndex — LayoutIR Reader</div>
+          <div class="block-desc">Deterministic IR-based document ingestion pipeline with content hashing and rapid OCR. Merged into LlamaIndex core.</div>
+          <div class="block-stack">Python · IR · OCR</div>
+          <div class="block-links"><a href="https://lnkd.in/gHCkd3Ga" target="_blank" rel="noopener">[pr]</a> <a href="https://lnkd.in/g4VjAySC" target="_blank" rel="noopener">[integration]</a></div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.78"></div>
+            <span class="load-val">LOAD 0.78</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.73">
+          <div class="block-header">
+            <span class="block-id">BLOCK_05</span>
+            <span class="block-status">COMPLETE</span>
+          </div>
+          <div class="block-title">model2gguf</div>
+          <div class="block-desc">Published CLI tool to convert HuggingFace models to GGUF format (fp16/int4). Actively used in llama.cpp / Ollama ecosystem.</div>
+          <div class="block-stack">Python · HuggingFace · GGUF · llama.cpp</div>
+          <div class="block-links"><a href="https://pypi.org/project/model2gguf/" target="_blank" rel="noopener">[pypi]</a></div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.73"></div>
+            <span class="load-val">LOAD 0.73</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.68">
+          <div class="block-header">
+            <span class="block-id">BLOCK_06</span>
+            <span class="block-status">COMPLETE</span>
+          </div>
+          <div class="block-title">Titan Architecture</div>
+          <div class="block-desc">Custom DistilBERT variant with reduced heads and wider FFN. 79% SST-2 accuracy with 40% fewer parameters.</div>
+          <div class="block-stack">PyTorch · Transformers</div>
+          <div class="block-links"><a href="https://github.com/RahulPatnaik/Titan-architechture" target="_blank" rel="noopener">[src]</a></div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.68"></div>
+            <span class="load-val">LOAD 0.68</span>
+          </div>
+        </div>
+
+        <div class="compute-block" data-load="0.65">
+          <div class="block-header">
+            <span class="block-id">BLOCK_07</span>
+            <span class="block-status">COMPLETE</span>
+          </div>
+          <div class="block-title">TriageFlow</div>
+          <div class="block-desc">Agentic AI triage system for ER departments. Multimodal input, ResNet18 image classifier, Gemini RAG pipeline.</div>
+          <div class="block-stack">Next.js · FastAPI · Gemini · TensorFlow</div>
+          <div class="block-links"><a href="https://github.com/CubeStar1/triage-flow" target="_blank" rel="noopener">[src]</a></div>
+          <div class="block-load">
+            <div class="load-bar" style="--load: 0.65"></div>
+            <span class="load-val">LOAD 0.65</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════ RESUME — cv_manifest ═══════════ -->
+    <section id="cv_manifest" class="section" data-kernel="02">
+      <div class="section-header">
+        <span class="section-tag">// kernel_02 :: cv_manifest</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="manifest-grid">
+
+        <!-- Education -->
+        <div class="manifest-module">
+          <div class="module-header">EDUCATION</div>
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">RV College of Engineering</span>
+              <span class="entry-date">2023 — 2027</span>
+            </div>
+            <div class="entry-secondary">B.E. Computer Science & Engineering (Data Science)</div>
+            <div class="entry-detail">CGPA: 9.32/10 · Bangalore, India</div>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="manifest-module">
+          <div class="module-header">EXPERIENCE</div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">Research Collaborator</span>
+              <span class="entry-date">Dec 2024 — Present</span>
+            </div>
+            <div class="entry-secondary">with Arun Balajee Vasudevan (ex-CMU Postdoc; Research Scientist, Amazon USA)</div>
+            <div class="entry-detail">GRPO for LLM-driven 3D structure generation · Reward signal design · Policy optimisation</div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">Research Collaboration — Quantum ML</span>
+              <span class="entry-date">Oct 2024 — Present</span>
+            </div>
+            <div class="entry-secondary">Unisys Corporation · Bangalore</div>
+            <div class="entry-detail">U.S. Patent Application No. 19/468,892 · 1st Prize UIP-16 (INR 3.5L) · QuantumHybridResNet 98.57% · QML Super-Resolution CycleGAN</div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">Research Intern — LLM & Autonomous Systems</span>
+              <span class="entry-date">Oct 2024 — Jul 2024</span>
+            </div>
+            <div class="entry-secondary">WIRIN (Wipro-IISC) Labs, RVCE</div>
+            <div class="entry-detail">QLoRA fine-tuned Llama-2 7B · Kannada RAG pipeline with LlamaIndex + GPT-4</div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">AI Intern</span>
+              <span class="entry-date">Aug 2025 — Sep 2025</span>
+            </div>
+            <div class="entry-secondary">Ernst & Young (EY)</div>
+            <div class="entry-detail">Agentic PDF extraction pipeline for structured output from unstructured financial docs</div>
+          </div>
+        </div>
+
+        <!-- Publications -->
+        <div class="manifest-module">
+          <div class="module-header">PUBLICATIONS & PATENTS</div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">IEEE TPAMI (manuscript in prep)</span>
+              <span class="entry-tag">JOURNAL</span>
+            </div>
+            <div class="entry-detail">Quantum-ConvNeXt: 99.84% accuracy, cosine similarity 0.993 ± 0.002. 21,672 MRI scans. FDA AI/ML SaMD compliant.</div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">MDPI Water, Q2 (SCI-E)</span>
+              <span class="entry-tag">PUBLISHED</span>
+            </div>
+            <div class="entry-detail">Early leakage detection in water pipelines via hydraulic feature engineering + ensemble ML. <a href="https://www.mdpi.com/2073-4441/17/14/2164" target="_blank" rel="noopener">[link]</a></div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">IEEE Access (under review)</span>
+              <span class="entry-tag">REVIEW</span>
+            </div>
+            <div class="entry-detail">FoG1DLSTM: 0.748 mAP on 70.9 GB MJFF dataset, 92.42% sensitivity, 0.976 AUC-ROC. Edge-deployable at 3.92 ms.</div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">IEEE CSITSS 2024</span>
+              <span class="entry-tag">PUBLISHED</span>
+            </div>
+            <div class="entry-detail">Brain tumor MRI classification — 99.45% accuracy. <a href="https://ieeexplore.ieee.org/document/10817000/" target="_blank" rel="noopener">[link]</a></div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">U.S. Patent App. No. 19/468,892</span>
+              <span class="entry-tag">PATENT</span>
+            </div>
+            <div class="entry-detail">Co-filed with Unisys. QuantumHybridResNet + QML Super-Resolution architectures. Filed Feb 2026, grant pending.</div>
+          </div>
+
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">Indian Patent (applied)</span>
+              <span class="entry-tag">PATENT</span>
+            </div>
+            <div class="entry-detail">Wearable airbag-deployment fall detection system for Parkinson's patients.</div>
+          </div>
+        </div>
+
+        <!-- Awards -->
+        <div class="manifest-module">
+          <div class="module-header">AWARDS</div>
+          <div class="manifest-entry">
+            <div class="entry-primary">
+              <span class="entry-title">1st Prize — Unisys Innovation Program 2025 (UIP-16)</span>
+              <span class="entry-tag">INR 3.5L</span>
+            </div>
+            <div class="entry-detail">Two invention disclosures on novel QML architectures for medical imaging. <a href="https://www.linkedin.com/posts/rahul-patnaik-239980289_uipy16-unisysinnovation2025-neuroscience-activity-7336349575529541635-75_y" target="_blank" rel="noopener">[link]</a></div>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="manifest-module">
+          <div class="module-header">TECHNICAL_SKILLS</div>
+          <div class="skills-dump">
+            <div class="skill-row"><span class="skill-key">lang</span><span class="skill-val">Python, C++, C, CUDA C++</span></div>
+            <div class="skill-row"><span class="skill-key">ml</span><span class="skill-val">PyTorch, TensorFlow, PennyLane, Transformers, Diffusers, LangChain, LlamaIndex</span></div>
+            <div class="skill-row"><span class="skill-key">sys</span><span class="skill-val">CUDA kernels (Softmax, MatMul, 1-bit), GGUF/llama.cpp, QLoRA</span></div>
+            <div class="skill-row"><span class="skill-key">qml</span><span class="skill-val">Variational Quantum Circuits, Dressed QC, Parameter-Shift Rule, PennyLane</span></div>
+            <div class="skill-row"><span class="skill-key">backend</span><span class="skill-val">FastAPI, Flask</span></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════ ABOUT — system_context ═══════════ -->
+    <section id="system_context" class="section" data-kernel="03">
+      <div class="section-header">
+        <span class="section-tag">// kernel_03 :: system_context</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="context-block">
+        <p class="context-line"><span class="ctx-prompt">&gt;</span> Undergraduate researcher at RVCE, Bangalore. I build at the intersection of machine learning, quantum computing, and low-level systems.</p>
+        <p class="context-line"><span class="ctx-prompt">&gt;</span> I write CUDA kernels that outperform PyTorch. I design quantum-classical hybrids that classify brain tumors at 99.84% accuracy. I publish in IEEE and file patents with Unisys.</p>
+        <p class="context-line"><span class="ctx-prompt">&gt;</span> My work is driven by a belief that compute is the medium — not just the tool. Every model is an architecture. Every kernel is a design decision. Every paper is a system pushed to its limit.</p>
+        <p class="context-line"><span class="ctx-prompt">&gt;</span> Currently: GRPO for 3D generation, Quantum-ConvNeXt for IEEE TPAMI, and CUDA inference engines from scratch.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ CONTACT — endpoint ═══════════ -->
+    <section id="endpoint" class="section" data-kernel="04">
+      <div class="section-header">
+        <span class="section-tag">// kernel_04 :: endpoint</span>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="endpoint-terminal">
+        <div class="terminal-line"><span class="term-prompt">$</span> echo $CONTACT</div>
+        <div class="terminal-output">
+          <div class="term-row"><span class="term-key">email</span><a href="mailto:rpatnaik2005@gmail.com">rpatnaik2005@gmail.com</a></div>
+          <div class="term-row"><span class="term-key">github</span><a href="https://github.com/RahulPatnaik" target="_blank" rel="noopener">github.com/RahulPatnaik</a></div>
+          <div class="term-row"><span class="term-key">linkedin</span><a href="https://www.linkedin.com/in/rahul-patnaik-239980289" target="_blank" rel="noopener">linkedin.com/in/rahul-patnaik</a></div>
+          <div class="term-row"><span class="term-key">phone</span>+91 96866 32808</div>
+          <div class="term-row"><span class="term-key">location</span>Bangalore, India</div>
+        </div>
+        <div class="terminal-line"><span class="term-prompt">$</span> <span class="terminal-cursor-inline">▌</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="footer-text">kernel_exit(0) · all threads joined · © 2025 Rahul Patnaik</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
